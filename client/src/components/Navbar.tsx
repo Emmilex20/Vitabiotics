@@ -201,6 +201,7 @@ const Navbar: React.FC = () => {
               <X />
             </button>
 
+            {/* SEARCH */}
             <form onSubmit={submitSearch} className="mb-4">
               <input
                 value={search}
@@ -210,47 +211,84 @@ const Navbar: React.FC = () => {
               />
             </form>
 
-            {['Home', 'Products', 'Quiz', 'Recommendations'].map((item) => (
-              <Link
-                key={item}
-                to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                onClick={closeMenu}
-                className="block px-4 py-3 rounded-xl hover:bg-gray-100"
-              >
-                {item}
-              </Link>
-            ))}
-
-            {/* MOBILE ADMIN */}
-            {user?.role === 'admin' && (
-              <Link
-                to="/admin/dashboard"
-                onClick={closeMenu}
-                className="mt-3 block px-4 py-3 rounded-xl bg-vita-primary/10 text-vita-primary font-semibold"
-              >
-                Admin Dashboard
-              </Link>
-            )}
-
-            {/* MOBILE LOGIN/REGISTER */}
-            {!user && (
-              <div className="mt-6 flex flex-col gap-3">
+            {/* LINKS */}
+            <div className="flex flex-col gap-2">
+              {['Home', 'Products', 'Quiz', 'Recommendations'].map((item) => (
                 <Link
-                  to="/login"
+                  key={item}
+                  to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                   onClick={closeMenu}
-                  className="px-4 py-3 text-center rounded-lg border border-vita-primary text-vita-primary hover:bg-vita-primary/10"
+                  className="block px-4 py-3 rounded-xl hover:bg-gray-100"
                 >
-                  Login
+                  {item}
                 </Link>
+              ))}
+
+              {/* ADMIN LINK */}
+              {user?.role === 'admin' && (
                 <Link
-                  to="/register"
+                  to="/admin/dashboard"
                   onClick={closeMenu}
-                  className="px-4 py-3 text-center rounded-lg bg-vita-primary text-white hover:bg-vita-primary/90"
+                  className="mt-2 block px-4 py-3 rounded-xl bg-vita-primary/10 text-vita-primary font-semibold"
                 >
-                  Sign Up
+                  Admin Dashboard
                 </Link>
-              </div>
-            )}
+              )}
+
+              {/* USER PROFILE / LOGIN */}
+              {user ? (
+                <div ref={profileRef} className="mt-4 relative">
+                  <button
+                    onClick={() => setProfileOpen(!profileOpen)}
+                    className="w-full flex items-center justify-between px-4 py-3 bg-vita-primary/10 rounded-lg"
+                  >
+                    <span>{user.firstName}</span>
+                    <User size={20} />
+                  </button>
+
+                  {profileOpen && (
+                    <div className="mt-2 bg-white border rounded-xl shadow-xl p-2 flex flex-col gap-2">
+                      <Link to="/profile" onClick={closeMenu} className="px-3 py-2 rounded-lg hover:bg-gray-100">Profile</Link>
+                      <Link to="/orders" onClick={closeMenu} className="px-3 py-2 rounded-lg hover:bg-gray-100">Orders</Link>
+                      <Link to="/settings" onClick={closeMenu} className="px-3 py-2 rounded-lg hover:bg-gray-100">Settings</Link>
+                      <button
+                        onClick={() => { logout(); closeMenu(); }}
+                        className="w-full text-left px-3 py-2 rounded-lg text-red-600 hover:bg-red-50"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="mt-4 flex flex-col gap-3">
+                  <Link
+                    to="/login"
+                    onClick={closeMenu}
+                    className="px-4 py-3 text-center rounded-lg border border-vita-primary text-vita-primary hover:bg-vita-primary/10"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={closeMenu}
+                    className="px-4 py-3 text-center rounded-lg bg-vita-primary text-white hover:bg-vita-primary/90"
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* CART */}
+            <Link
+              to="/cart"
+              onClick={closeMenu}
+              className="mt-4 flex items-center justify-center gap-2 px-4 py-3 bg-vita-primary/10 rounded-lg"
+            >
+              <ShoppingCart />
+              <span>Cart ({cartCount})</span>
+            </Link>
           </aside>
         </div>
       )}
