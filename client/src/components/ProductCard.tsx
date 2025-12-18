@@ -13,7 +13,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-emerald-50/40 hover:border-amber-100/60">
       
       {/* Product Image Container */}
-      <Link to={`/product/${product.slug}`} className="block overflow-hidden bg-gradient-to-br from-neutral-50 to-emerald-50/20 h-72 flex items-center justify-center">
+      <Link to={`/product/${product.slug}`} className="overflow-hidden bg-gradient-to-br from-neutral-50 to-emerald-50/20 h-72 flex items-center justify-center">
         <img 
           src={product.imageUrls[0] || 'https://via.placeholder.com/400x500.png?text=Vitabiotics+Product'} 
           alt={product.name} 
