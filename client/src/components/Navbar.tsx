@@ -231,6 +231,26 @@ const Navbar: React.FC = () => {
                 Admin Dashboard
               </Link>
             )}
+
+            {/* MOBILE LOGIN/REGISTER */}
+            {!user && (
+              <div className="mt-6 flex flex-col gap-3">
+                <Link
+                  to="/login"
+                  onClick={closeMenu}
+                  className="px-4 py-3 text-center rounded-lg border border-vita-primary text-vita-primary hover:bg-vita-primary/10"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={closeMenu}
+                  className="px-4 py-3 text-center rounded-lg bg-vita-primary text-white hover:bg-vita-primary/90"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
           </aside>
         </div>
       )}
