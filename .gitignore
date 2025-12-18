@@ -1,0 +1,17 @@
+# Ignore dotenv files (all variants) — keep example files
+.env*
+!.env.example
+!/server/.env.example
+!/client/.env.example
+
+# Node
+node_modules/
+
+# Dist
+dist/
+
+# OS files
+.DS_Store
+
+# Editor
+.vscode/
