@@ -59,7 +59,7 @@ app.use(
    ROOT
 ========================= */
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response) => { 
   res.send('✅ Vitabiotics API is running...');
 });
 
